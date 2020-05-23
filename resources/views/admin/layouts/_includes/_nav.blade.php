@@ -111,10 +111,28 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
+      <li class="nav-item dropdown menu-open">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          {{-- <i class="fas fa-cog"></i> --}}
+          @if (\App::getLocale() == 'en')
+            <img src="{{ asset('admin/assets/img/united-kingdom-flag-icon-32.png') }}" style="width: 25px" alt="" srcset=""> EN <span class="right fas fa-angle-down"></span>
+          @elseif(\App::getLocale() == 'id')
+            <img src="{{ asset('admin/assets/img/indonesia-flag-icon-32.png') }}" style="width: 25px" alt="" srcset=""> ID <span class="right fas fa-angle-down"></span>
+          @endif
         </a>
+        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">Language</span>
+          <div class="dropdown-divider"></div>
+          <a href="{{ route(Route::currentRouteName(), 'id') }}" class="dropdown-item">
+            <img src="{{ asset('admin/assets/img/indonesia-flag-icon-16.png') }}" alt="" srcset="">
+            <span class="float-right text-muted text-sm">Indonesia</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="{{ route(Route::currentRouteName(), 'en') }}" class="dropdown-item">
+            <img src="{{ asset('admin/assets/img/united-kingdom-flag-icon-16.png') }}" alt="" srcset="">
+            <span class="float-right text-muted text-sm">English</span>
+          </a>
+        </div>
       </li>
     </ul>
 </nav>
