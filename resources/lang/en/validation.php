@@ -145,7 +145,14 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
+    'success' => 'Success!',
+    'category_success' => 'Category has been created!',
+    'category_update' => 'Category has been updated!',
+    'category_delete' => 'Category has been deleted!',
+    'error' => 'Errors!',
 
-    'attributes' => [],
+    'attributes' => [
+        'category_name' => 'Category Name'
+    ],
 
 ];
