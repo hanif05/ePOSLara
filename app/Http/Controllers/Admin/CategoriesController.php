@@ -18,10 +18,18 @@ class CategoriesController extends Controller
     {
         $session['title'] = \Lang::get('title.categories');
         request()->session()->put($session);
-        
-        $data = Category::orderBy('created_at', 'desc')->paginate(2);
 
-        return view('admin.categories.index', compact('data'));
+        if (request()->search) {
+            if (request()->search != null) {
+                $data = Category::where('name', 'like', '%'.request()->search.'%')->paginate(10);
+            }
+        } else {
+            $data = Category::orderBy('created_at', 'desc')->paginate(10);
+        }
+        
+        $dataAll = Category::where('parent_id', 0)->orderBy('created_at', 'desc')->get();
+
+        return view('admin.categories.index', compact('data', 'dataAll'));
     }
 
     /**
@@ -44,7 +52,7 @@ class CategoriesController extends Controller
     {
         $data['name'] = $request->category_name;
         $data['slug'] = Str::slug($data['name']);
-        $data['parent_id'] = 0;
+        $data['parent_id'] = $request->parent_id;
         
         if (Category::create($data)) {
             $notif = [
@@ -89,6 +97,7 @@ class CategoriesController extends Controller
     {
         $data['name'] = $request->category_name;
         $data['slug'] = Str::slug($data['name']);
+        $data['parent_id'] = $request->id_parent;
 
         if ($category->update($data)) {
             $notif = [
@@ -97,7 +106,7 @@ class CategoriesController extends Controller
                 'message' => \lang::get('validation.category_update'),
             ];
         }
-        return redirect()->route('categories.index', app()->getLocale())->with($notif);
+        return redirect()->route('categories.index', $lang)->with($notif);
     }
 
     /**
