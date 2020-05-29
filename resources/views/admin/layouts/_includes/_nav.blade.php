@@ -134,5 +134,18 @@
           </a>
         </div>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="fas fa-cog"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">User</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="float-right text-muted text-sm">Logout</span>
+          </a>
+        </div>
+      </li>
     </ul>
 </nav>
