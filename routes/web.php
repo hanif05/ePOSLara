@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', 'en');
+
 Route::group(['prefix' => '{lang}'], function () {
     
     Route::get('/', function () {
