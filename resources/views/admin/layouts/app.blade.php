@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="{{ asset('admin/assets') }}/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('admin/assets') }}/plugins/summernote/summernote-bs4.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('admin/assets') }}/plugins/toastr/toastr.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -106,5 +108,8 @@
 <script src="{{ asset('admin/assets') }}/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('admin/assets') }}/js/demo.js"></script>
+<!-- Toastr -->
+<script src="{{ asset('admin/assets') }}/plugins/toastr/toastr.min.js"></script>
+@stack('script')
 </body>
 </html>
