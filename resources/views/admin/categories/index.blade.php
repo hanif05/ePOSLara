@@ -9,16 +9,18 @@
                         <h4 class="card-header">
                             @lang('label.category_table')
                             <div class="card-tools">
+                                <form action="{{ route('categories.index', app()->getLocale()) }}" method="GET" style="display: block">
                                 <div class="input-group input-group-sm" style="width: 150px;">
-                                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-              
-                                  <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                  </div>
-                                  <div class="right ml-1">
-                                      <a href="#" class="fa fa-plus-circle" data-toggle="modal" data-target="#modal-category"></a>
-                                  </div>
+                                    <input type="text" name="search" class="form-control float-right" placeholder="Search">
+                
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    </div>
+                                    <div class="right ml-1">
+                                        <a href="#" class="fa fa-plus-circle" data-toggle="modal" data-target="#modal-category"></a>
+                                    </div>
                                 </div>
+                                </form>
                             </div>
                         </h4>
                         <div class="card-body table-responsive">
@@ -38,7 +40,7 @@
                                         <td>{{ $key + $data->firstItem() }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
-                                        <td>{{ $category->parent_id }}</td>
+                                        <td>{{ $category->parented_name }}</td>
                                         <td>
                                             <a href="#" class="fas fa-pencil-alt" id="edit" data-category="{{ $category }}"></a> |
                                             <a href="#" class="fas fa-trash-alt" id="category_delete" data-id="{{ $category->id }}"></a>
@@ -72,6 +74,8 @@
     <script>
         $(document).on('click', "#edit", function(e) {
             var category = $(this).data('category');
+            var parent_id = category.parent_id;
+
             if (!category) return e.preventDefault()
 
             let url = "{{ route('categories.update', ['lang' => app()->getLocale(), 'category' => ':id' ]) }}";
@@ -80,9 +84,15 @@
             $('#id').val(category.id);
             $('#name').val(category.name);
             $('#slug').val(category.slug);
-            $('#parent_id').val(category.parent_id);
             $('#form-edit').prop('action', url);
             document.getElementById("form-edit").action = url;
+            console.log(parent_id);
+            if (parent_id > 0) {
+                document.getElementById(parent_id).selected = true;
+            } else {
+                document.getElementById("category_default").selected = true;
+            }
+            
             
             $('#modal-edit-category').modal('show');
 
