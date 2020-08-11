@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', 'en');
+Route::get('/pusher', function() {
+    return view('pusher');
+});
 
 Route::group(['prefix' => '{lang}'], function () {
     
@@ -21,7 +24,8 @@ Route::group(['prefix' => '{lang}'], function () {
         return view('welcome');
     });
     
-    Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('admin/login', 'Admin\AuthController@index')->name('admin.auth');
+    Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'jwt.verify'], function () {
         Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
         Route::resource('categories', 'CategoriesController');
     });

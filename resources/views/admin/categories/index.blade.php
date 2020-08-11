@@ -40,7 +40,7 @@
                                         <td>{{ $key + $data->firstItem() }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
-                                        <td>{{ $category->parented_name }}</td>
+                                        <td>{{ $category->parent ? $category->parent->name : '-' }}</td>
                                         <td>
                                             <a href="#" class="fas fa-pencil-alt" id="edit" data-category="{{ $category }}"></a> |
                                             <a href="#" class="fas fa-trash-alt" id="category_delete" data-id="{{ $category->id }}"></a>
